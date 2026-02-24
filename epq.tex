@@ -1,0 +1,87 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{subcaption}
+\usepackage{hyperref}
+\usepackage{xurl}
+\usepackage{array}
+\usepackage{graphicx}
+\usepackage{minted}
+\usepackage{multirow}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows}
+
+\title{EPQ TITLE} % TODO
+\author{Alex Ydens}
+
+% LATEX ARTICLES:
+% - https://latex-tutorial.com/tutorials/
+% - https://www.overleaf.com/learn/latex/
+% - https://www.overleaf.com/learn/latex/LaTeX_Graphics_using_TikZ%3A_A_Tutorial_for_Beginners_(Part_1)%E2%80%94Basic_Drawing
+% LATEX NOTES:
+% - \section{Section Name} for a section header
+% - \subsection{SubSection Name} for a subsection header
+% - \paragraph{Paragraph Caption} for a captioned paragraph
+% - \subparagraph{Subparagraph Caption} for a captioned subparagraph
+% -  surround inline equations in '$' symbols
+% - \begin{equation} \end{equation} for multiline equations
+% - \begin{equation*} \end{equation*} for non numbered multiline equations
+% - \begin{align} \end{align} for multiline equations aligned at the '&' symbols
+% - \begin{align*} \end{align*} for non numbered multiline equations aligned at
+% the '&' symbols
+% -  '\\' in a multiline equation for a new line
+% - \label{ident} to label something, \ref{ident} to reference it
+% - \left[ \right] for scaled '[]' brackets. same works for '(){}'
+% - \begin{matrix} \end{matrix} (with '\\' and '&') for matrices
+% - \begin{figure} \end{figure} for a figure
+% - \begin{figure}[vals]: '!' for force, 'h' here, 't' top, 'b' bottom, 'p' own
+% page. This works for table too, and probably lost of other things.
+% - \begin{subfigure}[a-z] \end{subfigure}[a-z] for a subfigure with a label
+% (\begin{subfigure}[a] will make figure N(a))
+% - \caption{Caption} for a figure caption
+% - \label{fig:ident} for a figure label
+% - \cite{ident} for a citation
+% - \footnote{Footnote} for a footnote
+% - \begin{table} \end{table} for a table
+% - \url{https://xkcd.com} for a url
+% - \textbf{ABC} for bold text
+% - \textit{ABC} for italics text
+% - \begin{itemize} \end{itemize} with lots of \item for bullet list
+% - \begin{enumerate} \end{enumerate} with lots of \item for bullet list
+
+%   \begin{minted}{c}
+% #include <stdio.h>
+% 
+% int main(int argc, char *argv[]) {
+%   printf("Hello world!\n");
+%   return 0;
+% }
+% 
+%   \end{minted}
+% \inputminted{c}{../src/main.c}
+% \mintinline{c}|printf("Hello %d\n", 1);|
+
+\begin{document}
+  \frenchspacing
+  \pagenumbering{gobble}
+  \maketitle
+  \newpage
+  \tableofcontents
+
+  \newpage
+  \pagenumbering{arabic}
+  \section{}
+
+  \newpage
+  \section{}
+
+  \newpage
+  \section{Appendix}
+    \begin{appendix}
+      \listoffigures
+      \listoftables
+      \bibliography{epq}
+      \nocite{*}
+      \bibliographystyle{ieeetr}
+    \end{appendix}
+\end{document}
