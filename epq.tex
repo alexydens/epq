@@ -1,4 +1,4 @@
-\documentclass[a4paper,12pt]{article}
+\documentclass[a4paper,12pt]{report}
 
 \usepackage{amsmath}
 \usepackage{subcaption}
@@ -11,7 +11,8 @@
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric, arrows}
 
-\title{EPQ TITLE} % TODO
+\title{How Has the Development of Digital Cryptography Both Influenced and Been
+Influenced by Moral and Legal Discussions Surrounding the Right to Privacy?}
 \author{Alex Ydens}
 
 % LATEX ARTICLES:
@@ -61,6 +62,8 @@
 % \inputminted{c}{../src/main.c}
 % \mintinline{c}|printf("Hello %d\n", 1);|
 
+% EPQ NOTE: 5,000 words target (can be slightly over)
+
 \begin{document}
   \frenchspacing
   \pagenumbering{gobble}
@@ -70,10 +73,84 @@
 
   \newpage
   \pagenumbering{arabic}
-  \section{}
+  \section{Abstract}
 
   \newpage
-  \section{}
+  \section{Introduction}
+These days, trust and security over the internet is becoming more and more
+essential. From communicating with banks, to managing sensitive information in a
+business, to communicating privately over a service such as WhatsApp, two things
+are always necessary: being able to verfiy you are who you say you are, and
+being able to send a message that cannot be intercepted and understood in
+transit. To accomplish this goal, digital cryptography has had to make several
+crucial advances over the last 70 years, but it has been far from smooth
+sailing. With so much valuable information at stake, and the risks of giving
+people absolute secrecy, research into digital cryptography has marked by
+frequently changing attitudes, standards and restrictions. The effect of these
+external factors on this field of study, and the implications some of the
+advances in it have yielded will be the focus of this document.
+
+  \newpage
+  \section{Initial State}
+When talking about the advancements in digital cryptography, it is useful to
+talk about the state of cryptography before any major advancements in digital
+cryptography, and why crytography is necessary when communicating over networks.
+  \subsection{Cryptography}
+By the time the first computers were being built, cryptography had not advanced
+much since the second world war. The most secure method of encryption was to
+create a suitably convoluted cipher machine, which had a good balance between
+ease of use, number of possible keys, and ease of key distribution.
+
+When computers in the modern sense (programmable, Turing-complete machines)
+first became available, they provided more or less equal benefits to
+cryptographer and cryptanalyst. The cryptographer could now afford to make far
+more convoluted algorithms to encrypt their messages, but the cryptanalyst could
+just as easily work through far more combinations quickly to test possible
+outcomes. The main advance came with ciphers containing large keys, such as the
+vernam cipher, where, as long as the key is equivalent in length to the original
+message, every byte of the message can be bitwise-XORed with the corresponding
+byte in the key, creating a theoretically perfect cipher. The obvious
+disadvantage to this system is that the key is now just as difficult to securely
+transmit as the message itself.
+  \subsection{Networks}
+The issues with computer networks are quite simple, especially for the internet
+in its current form. In a computer network, packets are routed through a large
+number of individual devices and cables, which are all potential points of
+attack for a person who wishes to intercept a communication. This was less of an
+issue initially (in the 1940s and 50s), where computer networks tended to only
+connect devices within a specific organisation (although wire tapping was still
+possible), but became an unavoidable issue in from 1969 onwards, at which point
+the ARPANet, and later the internet, connected many different sites and
+organisations, and eventually households and mobile devices. As such,
+intercepting communications has been a reasonably trivial goal for the majority
+of the time computers have been able to communicate with each other.
+
+This created two problems that could be solved through cryptography: trust and
+security. Firstly, there was the issue that if any person could intercept a
+communication, and anybody could send a communication, how can you be verify the
+origin of the messages you recieve? Equally, how can you verify that the
+messages you recieve haven't been tampered with on their way to you? Secondly,
+if anyone can intercept your communications, there was no way to send a message
+in secret without being sure someone other than the intended recipient had read
+it.
+
+  \newpage
+  \section{The DES and Symmetric Encryption}
+
+  \newpage
+  \section{Diffie-Hellman-Merkle Key Exchange and GCHQ's Equivalent}
+
+  \newpage
+  \section{RSA Encryption}
+
+  \newpage
+  \section{Restrictions on RSA and PGP's Legal Issues}
+
+  \newpage
+  \section{Quantum Computing's Impact on Digital Cryptography}
+
+  \newpage
+  \section{Standards for Post-Quantum Cryptography}
 
   \newpage
   \section{Appendix}
