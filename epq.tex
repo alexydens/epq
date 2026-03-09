@@ -9,7 +9,10 @@
 \usepackage{minted}
 \usepackage{multirow}
 \usepackage{tikz}
+\usepackage{setspace}
 \usetikzlibrary{shapes.geometric, arrows}
+
+\doublespacing
 
 \title{How Has the Development of Digital Cryptography Both Influenced and Been
 Influenced by Moral and Legal Discussions Surrounding the Right to Privacy?}
@@ -90,63 +93,121 @@ frequently changing attitudes, standards and restrictions. The effect of these
 external factors on this field of study, and the implications some of the
 advances in it have yielded will be the focus of this document.
 
-  \newpage
   \section{Symmetric Encryption}
-When computers in their current form first became commercially available,
-cryptography had not advanced much since the second world war. The most common
-type of cipher in use would involve a cipher machine, which would work in the
-following way. Firstly, a key would have to be agreed upon that was sufficiently
-long such that it couldn't be brute forced and sufficiently random such that it
-couldn't be guessed. Next, the sender would set up the cipher machine, which
-would consist of a convoluted circuit which changed as it encrypted the message,
-with the agreed upon key. After that, the sender would type the message
-character by character, into the machine, and each time a character was
-inputted, the corresponding enciphered character would be outputted. In this
-way, the message could be encrypted and sent to the reciever, who would repeat
-the process in reverse, using the same key.
+The first major breakthrough in digital encryption actually came before
+computers in their current form existed, in the 1910s, in the form of the Vernam
+cipher. The Vernam cipher, patented by Gilbert Vernam in 1919\cite{vernam}, was
+one of the earliest examples of a truly unbreakable cipher, when used correctly.
 
-This process had two major issues. Firstly, to create a cipher machine that was
-convienient to use and maintain, there was a limit on how convoluted you could
-make the circuit, and hence a limit on how secure your machine could be.
-Secondly, this method requires both sender and reciever to agree on a secret
-key beforehand. If the sender and reciever can't communicate securely without
-encryption, they won't be able to securely share their key, and hence can't use
-encryption. The only way to ensure secrecy was to deliver keys in person, which
-is clearly not ideal.
+    \subsection{Using the Vernam Cipher}
+To send a message using the Vernam cipher, the sender must first ensure their
+message uses a binary encoding. On computers, this is trivial - all data is
+encoded in binary on a digital computer - but when originally created, this
+required using a tape with holes in it to indicate zeros. Then, a key, which
+consists of a binary string of a length greater than or equal to that of the
+message, must be bitwise-XORed with the message to obtain the ciphertext. On the
+teletype machines of Vernam's time, this required laying the two tapes on top of
+each other, and reading any position which had a hole through one tape but not
+the other as a one, and all other positions as a zero. To get the plaintext from
+the ciphertext, the process could be done in again - just perform a
+bitwise-XOR on the ciphertext with the key, and the plaintext should emerge. See
+the table below for proof this process works as intended.
+      \begin{center}
+      \begin{table}[h!]
+      \begin{tabular}{ |c|c|c|c| }
+        \hline
+Plaintext & Key & Ciphertext (Plaintext XOR Key) & Plaintext (Ciphertext XOR
+Key) \\
+        \hline
+0 & 0 & 0 & 0 \\
+        \hline
+0 & 1 & 1 & 0 \\
+        \hline
+1 & 0 & 1 & 1 \\
+        \hline
+1 & 1 & 0 & 1 \\
+        \hline
+      \end{tabular}
+      \caption{Verifying the Vernam Cipher works as intended.}
+      \end{table}
+      \end{center}
+    \subsection{Issues with the Vernam Cipher}
+Despite being perfect in theory, and working well with the binary encoding used
+by digital computers, the Vernam Cipher has some fairly serious practical issues
+when used in isolation. First of all, to ensure perfect secrecy, the key must be
+at least as long as the message, completely random, and only known to the sender
+and the reciever. This means that, for each message sent, a sender and reciever
+would first have to generate a key as long as the message and send it privately.
+If the option of privately sending a bit pattern as long as the message was
+already available, then the sender and the reciever would not have needed to use
+encryption in the first place, and as such the Vernam cipher seems to have
+delegated the problem of sending secret messages to key distribution, rather
+than having solved the issue.
 
-On computers, the process was more or less the same. The sender and reciever
-agree on a key, the sender uses the key and an algorithm to encode the message,
-and the reciever uses the same key and the algorithm in reverse to decode the
-message. However, the previous limit on the complexity of a machine was more or
-less removed, as implementing a complex algorithm on a computer requires
-negligible increases in physical space compared to a simple one, and doesn't
-require any extra moving parts that need to be maintained.
+That being said, initially, there was simply no better way when sending private
+digital messages, meaning that those who could afford the cost and were able to
+handle the logistics (primalriy large organisations), hired people to deliver
+keys in groups of several at a time to those they wanted to communicate with,
+and then used the cipher with the delivered keys\cite{singh}. It wasn't perfect,
+as the keys could be lost in transit and more would be needed every so often,
+but it was better than sending messages regarding sensitive business matters in
+plaintext, where anyone without much effort could intercept and read them.
 
-As such, initial breakthroughs in the field of digital computing came in the
-form of better ``machines", most notably the Vernam cipher. To apply the Vernam
-cipher, where a bitwise-XOR is applied to the key and the message to get the
-ciphertext, and then the key and the ciphertext to get the plain text. As long
-as the key is truly random and equal in size to the cipher text, this offers
-perfect secrecy, and so the problem with this cipher rests only in the
-requirement for an agreed upon key, made worse by the fact that the length of
-the key must be at least the length of the message.
-
-  \newpage
   \section{The DES}
+    \subsection{Development}
+In response to the increasing use of digital encryption, and a desire to have a
+standardised way to utilise it in the government, America's National Bureau of
+Standards began to work in collaboration with the public to form a standard for
+digital cryptography that could be implemented by whoever needed it, simplifying
+the process of cross-organisational communication over encrypted channels.
 
-  \newpage
+This was formed initially of an algorithm built on similar principles as
+Vernam's cipher created at IBM by Horst Feistel, built into a cipher system that
+would hold up well against the attacks of the time. This wasn't that much more
+advanced as the Vernam and held the same issues as it, but that could be said of
+anything on the market at the time.
+
+The standard was then ran by the National Security Agency of America, who made
+some changes. Firstly, they modified it to be less vunerable to differential
+cryptanalysis, but more vunerable to brute-force methods, with a decreased key
+length of 56 bits\cite{schneier}. This decision was motiviated to ensure that
+DES could not be broken by most people, but organisations would be able to put a
+lot of time and effort into brute forcing it, thus allowing the US government
+the ability to break their citizen's encryption as they saw fit, and ensuring
+the standard they released could not be used against them be foreign
+adversaries. After this, in 1977, it was released.
+    \subsection{Criticism}
+The decisision to lower the key length did not go unnoticed amongst the US
+public, however. For example, Martin Hellman, who would go on to be one of the
+leading figures behind asymmetric encryption, initially spotted that the DES was
+vunerable to brute force attacks and, not knowing that this was a conscious
+decision by his government, raised the issue to the people behind the standards,
+only to be met with a response explaining the reasoning behind the decision. He
+made his dissapointment about this clear in a later lecture, stating ``What we
+had thought was a technical problem turned out to be political. If we wanted to
+improve the security of the standard, we would have to treat it as a political
+battle by seeking media coverage and congressional hearings - which we did.".
+
+And Hellman et al were not alone in this. Many critics did not see the weakening
+of the security of their communication as a move that would help protect the US
+public, seeing as foreign threats could easily develop their own standards.
+Furthermore, critics argued that the government having the power to read their
+secrets encroached on their right to privacy, treating people as guilty until
+proven innocent and allowing for mass surveillance of communications.
+
+It was this frustration with the US government's position on encryption,
+according to some\cite{schneier}, that lead to much of the innovation that was
+to come in the following years. It certainly was an inspiration for Martin
+Hellman\cite{hellman}.
+
   \section{Diffie-Hellman-Merkle Key Exchange and GCHQ's Equivalent}
 
-  \newpage
   \section{RSA Encryption}
 
-  \newpage
   \section{Restrictions on RSA and PGP's Legal Issues}
 
-  \newpage
   \section{Quantum Computing's Impact on Digital Cryptography}
 
-  \newpage
   \section{Standards for Post-Quantum Cryptography}
 
   \newpage
