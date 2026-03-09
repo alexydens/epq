@@ -1,0 +1,58 @@
+\begin{thebibliography}{10}
+
+\bibitem{openquantumsafe}
+OpenQuantumSafe, ``openquantumsafe.org.'' \url{openquantumsafe.org}.
+\newblock Accessed: 08-03-2026.
+
+\bibitem{nist}
+NIST, ``Nist releases first 3 finalized post-quantum encryption standards.''
+  \url{https://www.nist.gov/news-events/news/2024/08/nist-releases-first-3-finalized-post-quantum-encryption-standards}.
+\newblock Accessed: 08-03-2026.
+
+\bibitem{aaronson}
+S.~Aaronson, ``Shor, i'll do it.'' \url{https://scottaaronson.blog/?p=208}.
+\newblock Accessed: 08-03-2026.
+
+\bibitem{shor}
+P.~Shor, ``Algorithms for quantum computation: discrete logarithms and
+  factoring,'' in {\em Proceedings 35th Annual Symposium on Foundations of
+  Computer Science}, pp.~124--134, 1994.
+
+\bibitem{dubois}
+P.~L. Dubois, ``Pgp case.'' \url{https://dubois.com/pgp-case/}.
+\newblock Accessed: 08-03-2026.
+
+\bibitem{zimmermann}
+P.~Zimmermann, ``philzimmerman.com.'' \url{https://philzimmermann.com/}.
+\newblock Accessed: 08-03-2026.
+
+\bibitem{rivestshamiradleman}
+R.~L. Rivest, A.~Shamir, and L.~Adleman, ``A method for obtaining digital
+  signatures and public-key cryptosystems,'' {\em Commun. ACM}, vol.~21,
+  p.~120–126, Feb. 1978.
+
+\bibitem{ellis}
+J.~H. Ellis, ``The possibility of non-secret digital encryption,'' 1969.
+\newblock Declasified: 18-12-1997.
+
+\bibitem{merkle}
+R.~C. Merkle, ``Secure communications over insecure channels,'' {\em Commun.
+  ACM}, vol.~21, p.~294–299, Apr. 1978.
+
+\bibitem{diffiehellman}
+W.~Diffie and M.~Hellman, ``New directions in cryptography,'' {\em IEEE
+  Transactions on Information Theory}, vol.~22, no.~6, pp.~644--654, 1976.
+
+\bibitem{hellman}
+M.~E. Hellman, ``Cybersecurity, nuclear security, alan turing, and illogical
+  logic,'' {\em Commun. ACM}, vol.~60, p.~52–59, Nov. 2017.
+
+\bibitem{mosca}
+M.~Mosca, ``Cybersecurity in an era with quantum computers: Will we be
+  ready?,'' {\em IEEE Security \& Privacy}, vol.~16, no.~5, pp.~38--41, 2018.
+
+\bibitem{singh}
+D.~S. Singh, {\em CODE BOOK: the secret history of codes and code-breaking}.
+\newblock Fourth Estate Ltd, 2011.
+
+\end{thebibliography}

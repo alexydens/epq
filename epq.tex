@@ -91,51 +91,48 @@ external factors on this field of study, and the implications some of the
 advances in it have yielded will be the focus of this document.
 
   \newpage
-  \section{Initial State}
-When talking about the advancements in digital cryptography, it is useful to
-talk about the state of cryptography before any major advancements in digital
-cryptography, and why crytography is necessary when communicating over networks.
-  \subsection{Cryptography}
-By the time the first computers were being built, cryptography had not advanced
-much since the second world war. The most secure method of encryption was to
-create a suitably convoluted cipher machine, which had a good balance between
-ease of use, number of possible keys, and ease of key distribution.
+  \section{Symmetric Encryption}
+When computers in their current form first became commercially available,
+cryptography had not advanced much since the second world war. The most common
+type of cipher in use would involve a cipher machine, which would work in the
+following way. Firstly, a key would have to be agreed upon that was sufficiently
+long such that it couldn't be brute forced and sufficiently random such that it
+couldn't be guessed. Next, the sender would set up the cipher machine, which
+would consist of a convoluted circuit which changed as it encrypted the message,
+with the agreed upon key. After that, the sender would type the message
+character by character, into the machine, and each time a character was
+inputted, the corresponding enciphered character would be outputted. In this
+way, the message could be encrypted and sent to the reciever, who would repeat
+the process in reverse, using the same key.
 
-When computers in the modern sense (programmable, Turing-complete machines)
-first became available, they provided more or less equal benefits to
-cryptographer and cryptanalyst. The cryptographer could now afford to make far
-more convoluted algorithms to encrypt their messages, but the cryptanalyst could
-just as easily work through far more combinations quickly to test possible
-outcomes. The main advance came with ciphers containing large keys, such as the
-vernam cipher, where, as long as the key is equivalent in length to the original
-message, every byte of the message can be bitwise-XORed with the corresponding
-byte in the key, creating a theoretically perfect cipher. The obvious
-disadvantage to this system is that the key is now just as difficult to securely
-transmit as the message itself.
-  \subsection{Networks}
-The issues with computer networks are quite simple, especially for the internet
-in its current form. In a computer network, packets are routed through a large
-number of individual devices and cables, which are all potential points of
-attack for a person who wishes to intercept a communication. This was less of an
-issue initially (in the 1940s and 50s), where computer networks tended to only
-connect devices within a specific organisation (although wire tapping was still
-possible), but became an unavoidable issue in from 1969 onwards, at which point
-the ARPANet, and later the internet, connected many different sites and
-organisations, and eventually households and mobile devices. As such,
-intercepting communications has been a reasonably trivial goal for the majority
-of the time computers have been able to communicate with each other.
+This process had two major issues. Firstly, to create a cipher machine that was
+convienient to use and maintain, there was a limit on how convoluted you could
+make the circuit, and hence a limit on how secure your machine could be.
+Secondly, this method requires both sender and reciever to agree on a secret
+key beforehand. If the sender and reciever can't communicate securely without
+encryption, they won't be able to securely share their key, and hence can't use
+encryption. The only way to ensure secrecy was to deliver keys in person, which
+is clearly not ideal.
 
-This created two problems that could be solved through cryptography: trust and
-security. Firstly, there was the issue that if any person could intercept a
-communication, and anybody could send a communication, how can you be verify the
-origin of the messages you recieve? Equally, how can you verify that the
-messages you recieve haven't been tampered with on their way to you? Secondly,
-if anyone can intercept your communications, there was no way to send a message
-in secret without being sure someone other than the intended recipient had read
-it.
+On computers, the process was more or less the same. The sender and reciever
+agree on a key, the sender uses the key and an algorithm to encode the message,
+and the reciever uses the same key and the algorithm in reverse to decode the
+message. However, the previous limit on the complexity of a machine was more or
+less removed, as implementing a complex algorithm on a computer requires
+negligible increases in physical space compared to a simple one, and doesn't
+require any extra moving parts that need to be maintained.
+
+As such, initial breakthroughs in the field of digital computing came in the
+form of better ``machines", most notably the Vernam cipher. To apply the Vernam
+cipher, where a bitwise-XOR is applied to the key and the message to get the
+ciphertext, and then the key and the ciphertext to get the plain text. As long
+as the key is truly random and equal in size to the cipher text, this offers
+perfect secrecy, and so the problem with this cipher rests only in the
+requirement for an agreed upon key, made worse by the fact that the length of
+the key must be at least the length of the message.
 
   \newpage
-  \section{The DES and Symmetric Encryption}
+  \section{The DES}
 
   \newpage
   \section{Diffie-Hellman-Merkle Key Exchange and GCHQ's Equivalent}
