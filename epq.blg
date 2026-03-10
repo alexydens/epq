@@ -1,0 +1,50 @@
+This is BibTeX, Version 0.99d (TeX Live 2026/dev/Arch Linux)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: epq.aux
+The style file: ieeetr.bst
+Database file #1: epq.bib
+Warning--entry type for "vernam" isn't style-file defined
+--line 25 of file epq.bib
+Warning--empty journal in ellis
+You've used 18 entries,
+            1876 wiz_defined-function locations,
+            571 strings with 5378 characters,
+and the built_in function-call counts, 3509 in all, are:
+= -- 368
+> -- 83
+< -- 0
++ -- 39
+- -- 21
+* -- 155
+:= -- 471
+add.period$ -- 30
+call.type$ -- 18
+change.case$ -- 17
+chr.to.int$ -- 0
+cite$ -- 19
+duplicate$ -- 185
+empty$ -- 385
+format.name$ -- 21
+if$ -- 909
+int.to.chr$ -- 0
+int.to.str$ -- 18
+missing$ -- 9
+newline$ -- 69
+num.names$ -- 18
+pop$ -- 96
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 153
+stack$ -- 0
+substring$ -- 126
+swap$ -- 79
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 0
+warning$ -- 1
+while$ -- 27
+width$ -- 20
+write$ -- 171
+(There were 2 warnings)

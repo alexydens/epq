@@ -89,22 +89,22 @@ great deal by the tug of war between the cryptographer and their government, who
 seek to allow ciphers sufficient for general use that they still have a way to
 break. This tug of war tends to lead to distrust in the government from its
 citizens, and rarely stays long in the government's favour. As such, I think
-that the approach of many governments, particulary the US government, in the
+that the approach of many governments, particularly the US government, in the
 past when it comes to cryptography has not been effective in achieving its goals
-or immroving the lives of its citizens.
+or improving the lives of its citizens.
 
   \newpage
   \section{Introduction}
 These days, trust and security over the internet is becoming more and more
 essential. From communicating with banks, to managing sensitive information in a
 business, to communicating privately over a service such as WhatsApp, two things
-are always necessary: being able to verfiy you are who you say you are, and
+are always necessary: being able to verify you are who you say you are, and
 being able to send a message that cannot be intercepted and understood in
 transit. To accomplish this goal, digital cryptography has had to make several
 crucial advances over the last 70 years, but it has been far from smooth
 sailing. With so much valuable information at stake, and the risks of giving
 people absolute secrecy, research into digital cryptography has marked by
-frequently changing attitudes, standards and restrictions. The effect of these
+frequently changing attitudes, standards and restrictions. The affect of these
 external factors on this field of study, and the implications some of the
 advances in it have yielded will be the focus of this document.
 
@@ -151,17 +151,17 @@ Despite being perfect in theory, and working well with the binary encoding used
 by digital computers, the Vernam Cipher has some fairly serious practical issues
 when used in isolation. First of all, to ensure perfect secrecy, the key must be
 at least as long as the message, completely random, and only known to the sender
-and the reciever. This means that, for each message sent, a sender and reciever
+and the receiver. This means that, for each message sent, a sender and receiver
 would first have to generate a key as long as the message and send it privately.
 If the option of privately sending a bit pattern as long as the message was
-already available, then the sender and the reciever would not have needed to use
+already available, then the sender and the receiver would not have needed to use
 encryption in the first place, and as such the Vernam cipher seems to have
 delegated the problem of sending secret messages to key distribution, rather
 than having solved the issue.
 
 That being said, initially, there was simply no better way when sending private
 digital messages, meaning that those who could afford the cost and were able to
-handle the logistics (primalriy large organisations), hired people to deliver
+handle the logistics (primarily large organisations), hired people to deliver
 keys in groups of several at a time to those they wanted to communicate with,
 and then used the cipher with the delivered keys\cite{singh}. It wasn't perfect,
 as the keys could be lost in transit and more would be needed every so often,
@@ -183,22 +183,22 @@ advanced as the Vernam and held the same issues as it, but that could be said of
 anything on the market at the time.
 
 The standard was then ran by the National Security Agency of America, who made
-some changes. Firstly, they modified it to be less vunerable to differential
-cryptanalysis, but more vunerable to brute-force methods, with a decreased key
-length of 56 bits\cite{schneier}. This decision was motiviated to ensure that
+some changes. Firstly, they modified it to be less vulnerable to differential
+cryptanalysis, but more vulnerable to brute-force methods, with a decreased key
+length of 56 bits\cite{schneier}. This decision was motivated to ensure that
 DES could not be broken by most people, but organisations would be able to put a
 lot of time and effort into brute forcing it, thus allowing the US government
 the ability to break their citizen's encryption as they saw fit, and ensuring
 the standard they released could not be used against them be foreign
 adversaries. After this, in 1977, it was released.
     \subsection{Criticism}
-The decisision to lower the key length did not go unnoticed amongst the US
+The decision to lower the key length did not go unnoticed amongst the US
 public, however. For example, Martin Hellman, who would go on to be one of the
 leading figures behind asymmetric encryption, initially spotted that the DES was
-vunerable to brute force attacks and, not knowing that this was a conscious
+vulnerable to brute force attacks and, not knowing that this was a conscious
 decision by his government, raised the issue to the people behind the standards,
 only to be met with a response explaining the reasoning behind the decision. He
-made his dissapointment about this clear in a later lecture, stating ``What we
+made his disappointment about this clear in a later lecture, stating ``What we
 had thought was a technical problem turned out to be political. If we wanted to
 improve the security of the standard, we would have to treat it as a political
 battle by seeking media coverage and congressional hearings - which we did.".
@@ -225,7 +225,7 @@ Quite possibly the first viable solution to this problem was devised by Ralph
 Merkle in 1974\cite{merkle}. The idea was simple: have the recipient share a
 piece of information that can't be used to decipher a message but can be used to
 encipher one, so that a sender can encipher their message and send it without
-requiring any previous secret communcation, and the reciever can then use the
+requiring any previous secret communication, and the receiver can then use the
 information they used to generate the public information to decipher the
 message. In this way, the key distribution problem is far easier to solve, as
 the information containing the keys can be sent publicly without fear of
@@ -235,17 +235,17 @@ The idea was to follow the steps outlined in Figure \ref{fig:merklepuzzle}.
 
     \begin{figure}[h!]
       \begin{enumerate}
-\item First, the reciever encrypts \(2^N\) messages of the form: ``The message
+\item First, the receiver encrypts \(2^N\) messages of the form: ``The message
 is X, the key is Y" with an algorithm that can be brute forced by a sender with
 some difficulty, such that brute forcing one would be practical, but brute
 forcing \(2^N\) would not. For each message, \(X\) and \(Y\) are chosen
 randomly, and the key used to encrypt the message is \(Y\). These messages are
 shared publicly, for anyone to use to send their message.
-\item The sender then takes a random message from those the recierver has sent,
+\item The sender then takes a random message from those the receiver has sent,
 and uses a brute force method to decrypt it. When they have achiever this, they
 send back their message encrypted by the key \(Y\) from the message they
 decrypted, followed by the value for \(X\) from that message in plaintext.
-\item The reciever can now take the message sent, look through the plaintext
+\item The receiver can now take the message sent, look through the plaintext
 forms of the messages they had encrypted and sent, and find the one which
 references the same plaintext \(X\) at the end of the sender's message. This
 will point them to the correct \(Y\) to decrypt and read the message.
@@ -277,9 +277,9 @@ see much use.
     \subsection{Diffie-Hellman(-Merkle) Key Distribution}
 A subsequent approach to this, based on a similar principle, is still in use
 today for certain applications. It is most commonly referred to as the
-Diffie-Hellman key disitrbution algorithm, although in this document I will call
+Diffie-Hellman key distribution algorithm, although in this document I will call
 it the Diffie-Hellman-Merkle key distribution algorithm, which is what Martin
-Hellman preffers it be called, in an effort to acknowledge the Ralph Merkle's
+Hellman prefers it be called, in an effort to acknowledge the Ralph Merkle's
 earlier contributions\cite{hellman}. The exact method requires some tricky
 number theory and modular arithmetic\cite{diffiehellman}, but the idea can be
 shown using the analogy given in Figure \ref{fig:diffiehellman}.
@@ -292,18 +292,19 @@ but them can recreate perfectly.
 their paint. They can then send this mixture publicly, knowing that paint can't
 be unmixed, so neither person's secret colour can be inferred from the mixture.
 This allows them to safely swap their paint mixtures.
-\item Next, they take the mixture they recieved and add their secret colour to
+\item Next, they take the mixture they received and add their secret colour to
 it. As such, each mixture now contains the starting paint, person A's secret
 colour, and person B's secret colour - both people have the same secret paint
 that nobody can replicate, without having to have send it securely to one
 another.
       \end{enumerate}
-      \caption{Steps required to use Merkle's Puzzles.}
+      \caption{Steps analogous to those required to use the
+Diffie-Hellman-Merkle key exchange algorithm.}
       \label{fig:diffiehellman}
     \end{figure}
 Because this idea only required modular arithmetic and raising integers to
 integer powers, it was easy and quick to implement on a computer, and could
-provide unparalelled security. As long as person A and person B carried out
+provide unparalleled security. As long as person A and person B carried out
 their numerical equivalent to the process outlined in Figure
 \ref{fig:diffiehellman}, they could be sure that they both had a key no one else
 could have guessed from the information they exchanged, and could proceed with
@@ -312,7 +313,7 @@ symmetric encryption to transfer their message.
 That being said, this approach is not completely without its downsides. Mainly,
 it requires both the sender and the receiver to actively exchange information
 and carry out computations before sending a message, making the process of
-sending information somewhat tedious. Ideally, a reciever would only have to
+sending information somewhat tedious. Ideally, a receiver would only have to
 share information once, and a sender could send as many messages as they want to
 them without issue.
 
@@ -335,7 +336,7 @@ benefit anyone.
 A system that solves this issue, and has been the encryption method of choice on
 the internet for several decades, is known as the RSA cryptosystem, after its
 creators, Ron Rivest, Adi Shamir and Leonard Adleman\cite{rivestshamiradleman}.
-Despite people moving away from it as of recent, the aproach it uses has become
+Despite people moving away from it as of recent, the approach it uses has become
 the foundation for most of the algorithms that have followed it, and is known as
 public-key cryptography.
 
@@ -349,45 +350,45 @@ messages. In this way, once encrypted, not even the sender can read the message
 used for decryption is known as the private key, as it should not be shared lest
 the system be compromised, and the one used for encryption is known as the
 public key, as it can be shared with anyone who wishes to send a message to the
-reciever. This is the principle of public-key cryptography, and a cipher that
+receiver. This is the principle of public-key cryptography, and a cipher that
 has a different key for encryption than the one it uses for decryption is known
 as an asymmetric cipher.
 
-The advantages of this system are massive over that of the Diffie-Hellman-Merkle
-key exchange are clear to see. When using the Diffie-Hellman-Merkle key
-exchange, any time a sender wants to send a message, it must coordinate a key
-exchange process with the sender, with both sides needing to send various
-numbers and perform various calculations, and this process having to be repeated
-for each new message. When it comes to using a public key, however, the process
-is far simpler. The reciever has to perform some calculations once, and can then
-send out a key that can be used for all future communications, for all future
-senders. The receiver need only recieve their key - no calculation is required
+The advantages of this system over that of the Diffie-Hellman-Merkle key
+exchange are clear to see. When using the Diffie-Hellman-Merkle key exchange,
+any time a sender wants to send a message, it must coordinate a key exchange
+process with the sender, with both sides needing to send various numbers and
+perform various calculations, and this process having to be repeated for each
+new message. When it comes to using a public key, however, the process is far
+simpler. The receiver has to perform some calculations once, and can then send
+out a key that can be used for all future communications, for all future
+senders. The receiver need only receive their key - no calculation is required
 on their end.
 
 In the case of the RSA cryptosystem in particular, the exact method is out of
 the scope of this document, but it is relies on the fact that if a private key
 is comprised of two sufficiently large primes, and a public key is comprised of
 their product, finding the prime factors of that product, and thus determining
-the private key from the public key, is not computationally feasable on a modern
+the private key from the public key, is not computationally feasible on a modern
 computer.
     \subsection{Hashing and Digital Signatures}
 RSA didn't just solve the problem with secrecy, however. When a piece of message
 is created, a hash can be generated from it. This is a number that is created by
 applying some hashing algorithm to the message. The goal of this is to detect
 errors in transit. The hash is sent with the message, and if the message has
-been corrupted in transit, the hash generated by the reciever from the message
+been corrupted in transit, the hash generated by the receiver from the message
 and the hash sent with the message will be different, signalling that the
 message is not the original. As such, hashing can be good for detecting
 corruption in transit, but not tampering, as although it does detect any
-changes, there is nothging stopping an interceptor from recalculating the hash
+changes, there is nothing stopping an interceptor from recalculating the hash
 after changing the message and sending that hash on rather than the one the
 sender had originally generated. The process is shown in Figure
 \ref{fig:signatures}.
     \begin{figure}[h!]
     \begin{center}
- \item The sender intially generates a hash of their message, encrypts it with
+ \item The sender initially generates a hash of their message, encrypts it with
  their public key, and sends it along with their message.
- \item The reciever decrypts the hash with the sender's public key, and compares
+ \item The receiver decrypts the hash with the sender's public key, and compares
  it to the hash of their message.
  \item If the message had been tampered with, the hashes wouldn't match as
  only the sender can correctly encrypt the hash with their private key.
@@ -398,9 +399,9 @@ sender had originally generated. The process is shown in Figure
       \caption{Using digital signatures.}
       \label{fig:signatures}
     \end{figure}
-In this way, public key cryptography solved the probem of trust or authenticity
+In this way, public key cryptography solved the problem of trust or authenticity
 along with the problem of secrecy, by ensuring that a message's source can be
-verified by the reciever. The main issue with this approach is the initial
+verified by the receiver. The main issue with this approach is the initial
 sharing of the public keys - how does the sender verify their identity when
 sending the public key? In practice, digital certificates are used to provide a
 standard way to authenticate devices the first time, with digital signatures
@@ -425,7 +426,7 @@ a commercial product instead\cite{clinton}.
 When RSA encryption was first created, it was patented by its creators, who
 formed a company to provide encryption to those who required it. This company is
 still in business today, under the name RSA Security USA LLC\cite{rsa}. This
-meant that, intially, the algorithm was not to be used or sold without acquiring
+meant that, initially, the algorithm was not to be used or sold without acquiring
 a license from the company. However, Phil Zimmermann, an American computer
 scientist at the time, created his own implementation of the cryptosystem,
 wrapped up in an easy to use application, and titled it ``Pretty Good Privacy",
@@ -436,7 +437,7 @@ RSA Security USA LLC were understandably not pleased. If potential customers
 could get an implementation of the same product they were offering, wrapped up
 in an easy to use package and already in wide use completely for free, they were
 exceedingly unlikely to require an implementation that came with a recurring
-cost and was used by (and therefore supported by) comparitively less people. As
+cost and was used by (and therefore supported by) comparatively less people. As
 such, in May 1997, RSA Security USA LLC took Phil Zimmermann to
 court\cite{leaks}. This case was resolved through a settlement.
 
@@ -449,20 +450,20 @@ government, and it was considered a munition, this constituted arms dealing of
 Zimmermann's part. Zimmermann responded in an unorthodox way, publishing the
 full source code of the software in a hardback book. The reasoning behind this
 was that the while the export of munitions was controlled by the US government,
-the export of books was protected by the First Ammendment, and so controlling
+the export of books was protected by the First Amendment, and so controlling
 the export of the book was much harder to justify legally. Furthermore, by
 publishing it as a book, Zimmermann attempted to frame the classification as
 ridiculous, as a book cannot be used as a weapon, and was being treated the same
 as bombs and guns. In the end, through a mixture of the changing regulations,
 the US public being firmly in Zimmermann's favour, and the fact that it was
-difficult to legally restrict a book, the investiagion was closed without any
+difficult to legally restrict a book, the investigation was closed without any
 charges being filed.
 
   \section{Quantum Computing's Impact on Digital Cryptography}
     \subsection{Shor's Algorithm}
 For around twenty years after it's first release in 1977, the problem the RSA
 cryptosystem's effectiveness relies on, factorising large products of primes,
-was considered computationally unfeasable. To this day, there is no known
+was considered computationally unfeasible. To this day, there is no known
 algorithm on a classical computer that can perform the task in a tractable
 timeframe. However, in 1994, Peter Shor devised an algorithm that would allow a
 quantum computer perform this task in \(O((\log N)^3)\) time. The principle it
@@ -472,7 +473,7 @@ builds upon can be seen in Figure \ref{fig:beforeshors}.
 Given two primes \(p\) and \(q\), every sequence of the form
 \((u_n) = x^n \mod N\), where \(N = pq\) and \(x\) is a positive integer is
 periodic with a period that cleanly divides \((p-1)(q-1)\). As such, if we are
-able to compute this period with sufficien values for \(x\), we can find \(p\)
+able to compute this period for sufficient values for \(x\), we can find \(p\)
 and \(q\).
     \end{center}
       \caption{Simplifying the Prime Factorisation Problem.}
@@ -500,7 +501,7 @@ The implications of the discovery of such an algorithm were tremendous. The most
 popular method of encryption, implemented virtually everywhere and only getting
 more popular as the internet grew, had a flaw that could be exploited, given the
 right technology. One impact this had was to prompt people to work on new
-algorithms that were not vunerable to quantum computers, and several are
+algorithms that were not vulnerable to quantum computers, and several are
 available today. Another impact it had was to fuel research into the field of
 quantum computing, which was still in its infancy at the time. As of yet, no
 quantum computer has been built capable of breaking modern RSA, as practical
@@ -515,11 +516,11 @@ push to work on solutions to this problem.
 
   \section{Standards for Post-Quantum Cryptography}
 In general, the response to Shor's algorithm has been somewhat sluggish on the
-internet. Despite the fact it has been over three decades since the vunerability
+internet. Despite the fact it has been over three decades since the vulnerability
 in RSA encryption was exposed at the time of writing, it is still seeing
 extremely widespread use across the internet. This has prompted some academics
 to work on the field of post-quantum cryptography, and now many algorithms exist
-that are not vunerable to quantum computers. To describe when an organisation
+that are not vulnerable to quantum computers. To describe when an organisation
 should switch to quantum-safe methods of encryption, Michelle Mosca wrote up a
 scientific paper which contained a theorem now in wide use referred to as
 Mosca's theorem, which states that the time a piece of data needs to be secure
@@ -534,10 +535,10 @@ encryption in late 2016\cite{openquantumsafe}, along with a C library that
 implements it. As this library is relatively new, it will almost certainly not
 be in wide use, as generally larger projects like to rely on tried and tested
 projects that are big enough to face scrutiny if something is wrong and to
-receive regular maintainence. One of the larges projects available for
+receive regular maintenance. One of the larges projects available for
 implementing cryptographic protocols on the internet has always been OpenSSL.
 They implement a separate standard, that of NIST\cite{nist}, the National
-Institute of Standards and Technology. This is is wide use as of the time of
+Institute of Standards and Technology. This is in wide use as of the time of
 writing, but not yet more so than RSA encryption.
 
 In general, the issue with quantum computing remains the same as always - it
@@ -546,7 +547,7 @@ resources will be able to take advantage of. As such, it allows governments to
 use it against each other and against their citizens. Due to this, the
 conversations sparked are very much the same ones as always, where citizens
 maintain that they deserve the right to privacy, and will continue to innovate
-to ensure that they can acheive it.
+to ensure that they can achieve it.
 
   \section{Conclusion}
 In conclusion, it is clear to see how constant innovation has driven governments

@@ -1,0 +1,22 @@
+\contentsline {section}{\numberline {0.1}Abstract}{1}{section.0.1}%
+\contentsline {section}{\numberline {0.2}Introduction}{2}{section.0.2}%
+\contentsline {section}{\numberline {0.3}Symmetric Encryption}{2}{section.0.3}%
+\contentsline {subsection}{\numberline {0.3.1}Using the Vernam Cipher}{2}{subsection.0.3.1}%
+\contentsline {subsection}{\numberline {0.3.2}Issues with the Vernam Cipher}{3}{subsection.0.3.2}%
+\contentsline {section}{\numberline {0.4}The DES}{4}{section.0.4}%
+\contentsline {subsection}{\numberline {0.4.1}Development}{4}{subsection.0.4.1}%
+\contentsline {subsection}{\numberline {0.4.2}Criticism}{5}{subsection.0.4.2}%
+\contentsline {section}{\numberline {0.5}Diffie-Hellman-Merkle Key Exchange and GCHQ's Equivalent}{6}{section.0.5}%
+\contentsline {subsection}{\numberline {0.5.1}Merkle's Puzzles}{7}{subsection.0.5.1}%
+\contentsline {subsection}{\numberline {0.5.2}Diffie-Hellman(-Merkle) Key Distribution}{8}{subsection.0.5.2}%
+\contentsline {subsection}{\numberline {0.5.3}GCHQ's Equivalent Discovery}{10}{subsection.0.5.3}%
+\contentsline {section}{\numberline {0.6}RSA Encryption}{10}{section.0.6}%
+\contentsline {subsection}{\numberline {0.6.1}Hashing and Digital Signatures}{12}{subsection.0.6.1}%
+\contentsline {section}{\numberline {0.7}Restrictions on RSA and PGP's Legal Issues}{13}{section.0.7}%
+\contentsline {subsection}{\numberline {0.7.1}PGP}{14}{subsection.0.7.1}%
+\contentsline {section}{\numberline {0.8}Quantum Computing's Impact on Digital Cryptography}{15}{section.0.8}%
+\contentsline {subsection}{\numberline {0.8.1}Shor's Algorithm}{15}{subsection.0.8.1}%
+\contentsline {subsection}{\numberline {0.8.2}Reactions}{17}{subsection.0.8.2}%
+\contentsline {section}{\numberline {0.9}Standards for Post-Quantum Cryptography}{17}{section.0.9}%
+\contentsline {section}{\numberline {0.10}Conclusion}{19}{section.0.10}%
+\contentsline {section}{\numberline {0.11}Appendix}{20}{section.0.11}%
