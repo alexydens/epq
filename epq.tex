@@ -207,19 +207,19 @@ work on solutions to the key exchange problem, where each solution had its fair
 share of upsides and downsides.
     \subsection{Merkle's Puzzles}
 Quite possibly the first viable solution to this problem was devised by Ralph
-Merkle in 1974. The idea was simple: have the recipient share a piece of
-information that can't be used to decipher a message but can be used to encipher
-one, so that a sender can encipher their message and send it without requiring
-any previous secret communcation, and the reciever can then use the information
-they used to generate the public information to decipher the message. In this
-way, the key distribution problem is far easier to solve, as the information
-containing the keys can be sent publicly without fear of interception.
+Merkle in 1974\cite{merkle}. The idea was simple: have the recipient share a
+piece of information that can't be used to decipher a message but can be used to
+encipher one, so that a sender can encipher their message and send it without
+requiring any previous secret communcation, and the reciever can then use the
+information they used to generate the public information to decipher the
+message. In this way, the key distribution problem is far easier to solve, as
+the information containing the keys can be sent publicly without fear of
+interception.
 
-The idea was to follow the following steps:
+The idea was to follow the steps outlined in Figure \ref{fig:merklepuzzle}.
 
-    \begin{figure}
+    \begin{figure}[h!]
       \begin{enumerate}
-      \end{enumerate}
 \item First, the reciever encrypts \(2^N\) messages of the form: ``The message
 is X, the key is Y" with an algorithm that can be brute forced by a sender with
 some difficulty, such that brute forcing one would be practical, but brute
@@ -237,7 +237,9 @@ will point them to the correct \(Y\) to decrypt and read the message.
 \item Without knowing which of the \(2^N\) messages the sender chose to brute
 force to send their message, an interceptor would need to keep brute forcing
 them until the correct one is found, which is impractical.
+      \end{enumerate}
       \caption{Steps required to use Merkle's Puzzles.}
+      \label{fig:merklepuzzle}
     \end{figure}
 
 With this system in place, a sender can send the information necessary for
@@ -256,11 +258,155 @@ chose to brute force, causing the message to be read without much hassle. As
 such, Merkle's Puzzles gave the field of cryptography research hope that the key
 distribution problem was solvable, but did not yet provide a solution that would
 see much use.
+
     \subsection{Diffie-Hellman(-Merkle) Key Distribution}
+A subsequent approach to this, based on a similar principle, is still in use
+today for certain applications. It is most commonly referred to as the
+Diffie-Hellman key disitrbution algorithm, although in this document I will call
+it the Diffie-Hellman-Merkle key distribution algorithm, which is what Martin
+Hellman preffers it be called, in an effort to acknowledge the Ralph Merkle's
+earlier contributions\cite{hellman}. The exact method requires some tricky
+number theory and modular arithmetic\cite{diffiehellman}, but the idea can be
+shown using the analogy given in Figure \ref{fig:diffiehellman}.
+    \begin{figure}[h!]
+      \begin{enumerate}
+\item Let's say person A and person B both have a common starting paint,
+available to anyone, and want to end up with a common ending paint that no one
+but them can recreate perfectly.
+\item Person A and person B can both select a secret colour, and mix it into
+their paint. They can then send this mixture publicly, knowing that paint can't
+be unmixed, so neither person's secret colour can be inferred from the mixture.
+This allows them to safely swap their paint mixtures.
+\item Next, they take the mixture they recieved and add their secret colour to
+it. As such, each mixture now contains the starting paint, person A's secret
+colour, and person B's secret colour - both people have the same secret paint
+that nobody can replicate, without having to have send it securely to one
+another.
+      \end{enumerate}
+      \caption{Steps required to use Merkle's Puzzles.}
+      \label{fig:diffiehellman}
+    \end{figure}
+Because this idea only required modular arithmetic and raising integers to
+integer powers, it was easy and quick to implement on a computer, and could
+provide unparalelled security. As long as person A and person B carried out
+their numerical equivalent to the process outlined in Figure
+\ref{fig:diffiehellman}, they could be sure that they both had a key no one else
+could have guessed from the information they exchanged, and could proceed with
+symmetric encryption to transfer their message.
+
+That being said, this approach is not completely without its downsides. Mainly,
+it requires both the sender and the receiver to actively exchange information
+and carry out computations before sending a message, making the process of
+sending information somewhat tedious. Ideally, a reciever would only have to
+share information once, and a sender could send as many messages as they want to
+them without issue.
+
+    \subsection{GCHQ's Equivalent Discovery}
+Diffie-Hellman-Merkle key exchange had actually been discovered before it was
+independently discovered by Diffie and Hellman and shared with the public, in
+GCHQ. Clifford Cocks and James H. Ellis had collaborated on the project after
+being shown the problem and becoming interested in it in the mid 1970s, but were
+not able to release their findings to the public because it was kept secret by
+GCHQ until December 1997\cite{ellis}.
+
+This prevented this the original discoverers from getting the credit they
+deserved in their lifetimes, and lead to the advancements in the field being
+delayed by some time. Furthermore, GCHQ is not known to have used these findings
+themselves, not realising how revolutionary they were at the time. As such, the
+government's secrecy surrounding this discovery impeded research and did not
+benefit anyone.
 
   \section{RSA Encryption}
+A system that solves this issue, and has been the encryption method of choice on
+the internet for several decades, is known as the RSA cryptosystem, after its
+creators, Ron Rivest, Adi Shamir and Leonard Adleman\cite{rivestshamiradleman}.
+Despite people moving away from it as of recent, the aproach it uses has become
+the foundation for most of the algorithms that have followed it, and is known as
+public-key cryptography.
+
+The idea is as follows. If a cipher could be devised such that a different key
+is required to encrypt it than the key required to decrypt it, and it is
+suitably difficult to generate the decryption key from the encryption key, then
+a receiver can just send out their encryption key and let anyone encrypt a
+message with it, and keep their decryption key private and use it to decrypt
+messages. In this way, once encrypted, not even the sender can read the message
+- only the receiver, that has the decryption key, can do that. Usually, the key
+used for decryption is known as the private key, as it should not be shared lest
+the system be compromised, and the one used for encryption is known as the
+public key, as it can be shared with anyone who wishes to send a message to the
+reciever. This is the principle of public-key cryptography, and a cipher that
+has a different key for encryption than the one it uses for decryption is known
+as an asymmetric cipher.
+
+The advantages of this system are massive over that of the Diffie-Hellman-Merkle
+key exchange are clear to see. When using the Diffie-Hellman-Merkle key
+exchange, any time a sender wants to send a message, it must coordinate a key
+exchange process with the sender, with both sides needing to send various
+numbers and perform various calculations, and this process having to be repeated
+for each new message. When it comes to using a public key, however, the process
+is far simpler. The reciever has to perform some calculations once, and can then
+send out a key that can be used for all future communications, for all future
+senders. The receiver need only recieve their key - no calculation is required
+on their end.
+
+In the case of the RSA cryptosystem in particular, the exact method is out of
+the scope of this document, but it is relies on the fact that if a private key
+is comprised of two sufficiently large primes, and a public key is comprised of
+their product, finding the prime factors of that product, and thus determining
+the private key from the public key, is not computationally feasable on a modern
+computer.
 
   \section{Restrictions on RSA and PGP's Legal Issues}
+Initially, the US government were not pleased with the discovery of public-key
+encryption due to the fact that it made it significantly harder for them to
+wire-tap individuals they deemed suspicious. As such, just as the DES had a
+reduced key length to make it more prone to brute force attacks, RSA with a
+large enough key was considered a munitions, and so could not be distributed
+without prosecution for arms dealing. This revitalised national debate in the US
+over the right to privacy, with many protesting the US government's strict
+stance on the matter, arguing it wasn't their business what they chose to send
+to each other, and that criminals had no reason to comply to the regulations, so
+the main victims would be law-abiding citizens for whom wire tapping is wholly
+unnecessary. It took the US government until 1996 to take a more relaxed stance
+on the matter, removing encryption from their list of munitions, considering it
+a commercial product instead\cite{clinton}.
+
+    \subsection{PGP}
+When RSA encryption was first created, it was patented by its creators, who
+formed a company to provide encryption to those who required it. This company is
+still in business today, under the name RSA Security USA LLC\cite{rsa}. This
+meant that, intially, the algorithm was not to be used or sold without acquiring
+a license from the company. However, Phil Zimmermann, an American computer
+scientist at the time, created his own implementation of the cryptosystem,
+wrapped up in an easy to use application, and titled it ``Pretty Good Privacy",
+or PGP for short. After sending it to a friend, it quickly spread across Usenet
+forums, allowing anyone to use the algorithm without a license\cite{zimmermann}.
+
+RSA Security USA LLC were understandably not pleased. If potential customers
+could get an implementation of the same product they were offering, wrapped up
+in an easy to use package and already in wide use completely for free, they were
+exceedingly unlikely to require an implementation that came with a recurring
+cost and was used by (and therefore supported by) comparitively less people. As
+such, in May 1997, RSA Security USA LLC took Phil Zimmermann to
+court\cite{leaks}. This case was resolved through a settlement.
+
+This was not the end of PGP's legal troubles, however. Due to the fact strong
+encryption was considered a munition by the US government at the time of PGP's
+release, Zimmermann was investigated by the US government for arms
+dealing\cite{dubois}. The US government's argument was that since the source
+code had been distributed to several countries without consulting the
+government, and it was considered a munition, this constituted arms dealing of
+Zimmermann's part. Zimmermann responded in an unorthodox way, publishing the
+full source code of the software in a hardback book. The reasoning behind this
+was that the while the export of munitions was controlled by the US government,
+the export of books was protected by the First Ammendment, and so controlling
+the export of the book was much harder to justify legally. Furthermore, by
+publishing it as a book, Zimmermann attempted to frame the classification as
+ridiculous, as a book cannot be used as a weapon, and was being treated the same
+as bombs and guns. In the end, through a mixture of the changing regulations,
+the US public being firmly in Zimmermann's favour, and the fact that it was
+difficult to legally restrict a book, the investiagion was closed without any
+charges being filed.
 
   \section{Quantum Computing's Impact on Digital Cryptography}
 
