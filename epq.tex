@@ -77,6 +77,21 @@ Influenced by Moral and Legal Discussions Surrounding the Right to Privacy?}
   \newpage
   \pagenumbering{arabic}
   \section{Abstract}
+In this project, I sought to research the way differing regulations and
+standards from governments have influenced the development of digital
+cryptography in its current form. To do this, I have covered all the major
+developments of digital cryptography, for each one analysing how the discoveries
+have been influenced by differing rules and standards, and how those rules and
+standards have later been influenced by those discoveries. In general, I found
+that along with the constant tug of war between cryptographer and cryptanalyst
+found in most cryptographic research, digital cryptography has been influenced a
+great deal by the tug of war between the cryptographer and their government, who
+seek to allow ciphers sufficient for general use that they still have a way to
+break. This tug of war tends to lead to distrust in the government from its
+citizens, and rarely stays long in the government's favour. As such, I think
+that the approach of many governments, particulary the US government, in the
+past when it comes to cryptography has not been effective in achieving its goals
+or immroving the lives of its citizens.
 
   \newpage
   \section{Introduction}
@@ -355,6 +370,8 @@ is comprised of two sufficiently large primes, and a public key is comprised of
 their product, finding the prime factors of that product, and thus determining
 the private key from the public key, is not computationally feasable on a modern
 computer.
+    \subsection{Hashing}
+%!!!TODO!!!
 
   \section{Restrictions on RSA and PGP's Legal Issues}
 Initially, the US government were not pleased with the discovery of public-key
@@ -409,8 +426,109 @@ difficult to legally restrict a book, the investiagion was closed without any
 charges being filed.
 
   \section{Quantum Computing's Impact on Digital Cryptography}
+    \subsection{Shor's Algorithm}
+For around twenty years after it's first release in 1977, the problem the RSA
+cryptosystem's effectiveness relies on, factorising large products of primes,
+was considered computationally unfeasable. To this day, there is no known
+algorithm on a classical computer that can perform the task in a tractable
+timeframe. However, in 1994, Peter Shor devised an algorithm that would allow a
+quantum computer perform this task in \(O((\log N)^3)\) time. The principle it
+builds upon can be seen in Figure \ref{fig:beforeshors}.
+    \begin{figure}[h!]
+    \begin{center}
+Given two primes \(p\) and \(q\), every sequence of the form
+\((u_n) = x^n \mod N\), where \(N = pq\) and \(x\) is a positive integer is
+periodic with a period that cleanly divides \((p-1)(q-1)\). As such, if we are
+able to compute this period with sufficien values for \(x\), we can find \(p\)
+and \(q\).
+    \end{center}
+      \caption{Simplifying the Prime Factorisation Problem.}
+      \label{fig:beforeshors}
+    \end{figure}
+As such, the problem of prime factorisation boils down to finding the period of
+several sequences with very large periods. These periods are large enough that
+this is intractable on a classical computer, but it can be solved relatively
+easily on a quantum one.
+
+The algorithm used to find this period is known as Shor's algorithm, and is
+analogous the following\cite{aaronson}. If a person follows a day that isn't 24
+hours long, how can they know how long their day is purely from seeing several
+clocks, each with a different period (as opposed to the regular ``24" on the 12
+hour clock) and a board with a pin below each clock? To do this, the person can
+move each pin in the direction of the corresponding hour clock hand each time
+they wake up. For all the clocks where the periods don't align with their
+schedule, the pins will travel in circle-like patterns, with no net movement.
+However, for the clock with the same period as the person's schedule, the pin
+will be moving in the same direction each time, and will eventually move off the
+board.
+
+    \subsection{Reactions}
+The implications of the discovery of such an algorithm were tremendous. The most
+popular method of encryption, implemented virtually everywhere and only getting
+more popular as the internet grew, had a flaw that could be exploited, given the
+right technology. One impact this had was to prompt people to work on new
+algorithms that were not vunerable to quantum computers, and several are
+available today. Another impact it had was to fuel research into the field of
+quantum computing, which was still in its infancy at the time. As of yet, no
+quantum computer has been built capable of breaking modern RSA, as practical
+quantum computers are still a long way off. That being said, for some purposes,
+it is already too late. Many malicious actors on the internet have for some time
+been collecting public keys and messages that could contain sensitive
+information in what are known as store now decrypt later schemes. The idea is
+that as eventually quantum computers will likely be available and able to break
+RSA, if sensitive information is collected now that uses RSA, it can be broken
+when that day comes, and the information can be recovered. As such, there is a
+push to work on solutions to this problem.
 
   \section{Standards for Post-Quantum Cryptography}
+In general, the response to Shor's algorithm has been somewhat sluggish on the
+internet. Despite the fact it has been over three decades since the vunerability
+in RSA encryption was exposed at the time of writing, it is still seeing
+extremely widespread use across the internet. This has prompted some academics
+to work on the field of post-quantum cryptography, and now many algorithms exist
+that are not vunerable to quantum computers. To describe when an organisation
+should switch to quantum-safe methods of encryption, Michelle Mosca wrote up a
+scientific paper which contained a theorem now in wide use referred to as
+Mosca's theorem, which states that the time a piece of data needs to be secure
+plus the amount of time needed for your organisation to migrate to post-quantum
+encryption should be less than the time it will take to develop a sufficiently
+strong quantum computer that is able to break RSA encryption\cite{mosca}.
+
+Currently, there has been a push to publish standards for post quantum
+encryption and implement them into open-source tools. For example, the project
+OpenQuantumSafe released the first version of their standard for post quantum
+encryption in late 2016\cite{openquantumsafe}, along with a C library that
+implements it. As this library is relatively new, it will almost certainly not
+be in wide use, as generally larger projects like to rely on tried and tested
+projects that are big enough to face scrutiny if something is wrong and to
+receive regular maintainence. One of the larges projects available for
+implementing cryptographic protocols on the internet has always been OpenSSL.
+They implement a separate standard, that of NIST\cite{nist}, the National
+Institute of Standards and Technology. This is is wide use as of the time of
+writing, but not yet more so than RSA encryption.
+
+In general, the issue with quantum computing remains the same as always - it
+poses a threat to cryptography that only those with a large amount of time and
+resources will be able to take advantage of. As such, it allows governments to
+use it against each other and against their citizens. Due to this, the
+conversations sparked are very much the same ones as always, where citizens
+maintain that they deserve the right to privacy, and will continue to innovate
+to ensure that they can acheive it.
+
+  \section{Conclusion}
+In conclusion, it is clear to see how constant innovation has driven governments
+to take steps to maintain a tight grip on people's communications, which in turn
+has driven people to work towards maintaining their privacy through new
+innovation. In general, at the moment, the public maintain roughly equal footing
+with their governments, however this hasn't always been the case. It has been
+clear through the issues with the GCHQ version of the Diffie-Hellman-Merkle key
+exchange algorithm and through RSA that the government's attempts to regulate
+encryption typically end in failure. As such, it could be reasoned that it would
+be better for a government to work together with its citizens to ensure the
+success of modern encryption, developing standards that everyone can benefit
+from. That being said, the governments' want to maintain control over messages
+sent, particularly between those who could threaten the citizens they are
+responsible for, is understandable.
 
   \newpage
   \section{Appendix}
