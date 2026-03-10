@@ -201,6 +201,62 @@ to come in the following years. It certainly was an inspiration for Martin
 Hellman\cite{hellman}.
 
   \section{Diffie-Hellman-Merkle Key Exchange and GCHQ's Equivalent}
+The issue of key distribution for long keys, and the insecurity of shorter-key
+algorithms such as the one used for the DES standard gave rise to many people to
+work on solutions to the key exchange problem, where each solution had its fair
+share of upsides and downsides.
+    \subsection{Merkle's Puzzles}
+Quite possibly the first viable solution to this problem was devised by Ralph
+Merkle in 1974. The idea was simple: have the recipient share a piece of
+information that can't be used to decipher a message but can be used to encipher
+one, so that a sender can encipher their message and send it without requiring
+any previous secret communcation, and the reciever can then use the information
+they used to generate the public information to decipher the message. In this
+way, the key distribution problem is far easier to solve, as the information
+containing the keys can be sent publicly without fear of interception.
+
+The idea was to follow the following steps:
+
+    \begin{figure}
+      \begin{enumerate}
+      \end{enumerate}
+\item First, the reciever encrypts \(2^N\) messages of the form: ``The message
+is X, the key is Y" with an algorithm that can be brute forced by a sender with
+some difficulty, such that brute forcing one would be practical, but brute
+forcing \(2^N\) would not. For each message, \(X\) and \(Y\) are chosen
+randomly, and the key used to encrypt the message is \(Y\). These messages are
+shared publicly, for anyone to use to send their message.
+\item The sender then takes a random message from those the recierver has sent,
+and uses a brute force method to decrypt it. When they have achiever this, they
+send back their message encrypted by the key \(Y\) from the message they
+decrypted, followed by the value for \(X\) from that message in plaintext.
+\item The reciever can now take the message sent, look through the plaintext
+forms of the messages they had encrypted and sent, and find the one which
+references the same plaintext \(X\) at the end of the sender's message. This
+will point them to the correct \(Y\) to decrypt and read the message.
+\item Without knowing which of the \(2^N\) messages the sender chose to brute
+force to send their message, an interceptor would need to keep brute forcing
+them until the correct one is found, which is impractical.
+      \caption{Steps required to use Merkle's Puzzles.}
+    \end{figure}
+
+With this system in place, a sender can send the information necessary for
+anyone to encrypt a message and send it to them freely without worrying that an
+interceptor of this will be able to decipher the following message. As such, key
+distribution does not have to take place in secret anymore, so keys can be
+bigger, and the Vernam cipher can be used, strengthening messages considerably.
+
+There are two main issues with this system. First of all, it is rather
+impractical. To ensure brute forcing \(2^N\) messages cannot occur in a
+reasonable time frame, the sender needs to ensure that brute forcing one takes a
+considerable amount of time, making the process required of the sender
+computationally taxing. Secondly, it is possible the interceptor could get
+lucky, and the message the sender chose is one of the first the interceptor
+chose to brute force, causing the message to be read without much hassle. As
+such, Merkle's Puzzles gave the field of cryptography research hope that the key
+distribution problem was solvable, but did not yet provide a solution that would
+see much use.
+    \subsection{Diffie-Hellman(-Merkle) Key Distribution}
 
   \section{RSA Encryption}
 
